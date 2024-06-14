@@ -10,12 +10,20 @@ public class Library {
     public Library(){
         booksList.add(new Book("IOT",1,100,1.99f,"Rafiq"));
     }
+    public Library(Book book){
+        booksList.add(book);
+    }
 
     public Book addBookToCatalog(String bookName, int pages, float bookRent, String author){
     int x = booksList.size() + 1;
     Book newBook = new Book(bookName,x,pages,bookRent,author);
         booksList.add(newBook);
         return newBook;
+    }
+
+    public Book addBookToCatalog(Book book){
+        booksList.add(book);
+        return book;
     }
 
     public float getBookRent(String bookName){

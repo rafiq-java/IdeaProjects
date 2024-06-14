@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -71,16 +72,22 @@ class testingProjectTest {
  }
  @Test
     public void calculate_rent_method_should_return_value_based_on_number_of_days(){
-     rentedBook rentedBook = Mockito.mock(rentedBook.class);
-     //Book book = new Book("POP",2,300,5.0f,"Rafiq");
+     //  Library newLibrary = Mockito.spy(Library.class);
+
+     Book book = new Book("POP",2,300,5.0f,"Rafiq");
+     rentedBook rentedBook = new rentedBook(book);
+     rentedBook rentedBookSpied = Mockito.spy(rentedBook);
      //rentedBook rentedBook1 = new rentedBook(book);
-     LocalDate fourdaysback = LocalDate.now().minusDays(4);
- //  rentedBook1.setRentedDate(fourdaysback);
-     Mockito.when(rentedBook.getRentedDate()).thenReturn(fourdaysback);
-     Book book = new Book("PPP",2,300,10.0f,"rafiq");
-     Mockito.when(rentedBook.getBook()).thenReturn(book);
-     float calculatedRent = library.calculateRent(rentedBook);
-     assertThat(calculatedRent,equalTo(20f));
+   //  newLibrary.addBookToCatalog(book.getBookName(), book.getBookPages(), book.getBookRent(), book.getBookAuthor());
+     LocalDate fourdaysback = LocalDate.now().minusDays(10);
+     library.addBookToCatalog(book);
+     Mockito.when(rentedBookSpied.getRentedDate()).thenReturn(fourdaysback);
+     int x = library.booksList.size();
+    // Book book = new Book("PPP",2,300,10.0f,"rafiq");
+     Mockito.when(rentedBookSpied.getBook()).thenReturn(book);
+     float calculatedRent = library.calculateRent(rentedBookSpied);
+
+     assertThat(calculatedRent,equalTo(50f));
 
 
  }
